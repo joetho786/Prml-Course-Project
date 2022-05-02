@@ -28,16 +28,16 @@ def predict(request):
         # print(text)
      
         # print(predictor_model.model_)
-        try:
-            prediction = predictor_model.predict(text)
-            print(prediction)
-            display_prediction = True
-        except:
-            prediction = 'Error'
-            display_prediction = False
+       
+        prediction = predictor_model.predict(text)
+        print(prediction)
+        display_prediction = True
+        # except:
+        #     prediction = None
+        #     display_prediction = False
 
     
-    context = {'segment': 'analyze', 'prediction': prediction,'target':prediction['target'],'threat':prediction['threat']
+    context = {'segment': 'analyze','target':prediction['target'],'threat':prediction['threat']
     ,'insult':prediction['insult'], 'display_prediction': display_prediction}
     html_template = loader.get_template('home/index.html')
     return HttpResponse(html_template.render(context, request))
